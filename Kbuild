@@ -1,0 +1,2 @@
+-include $(src)/.config
+-include $(src)/Makefile.staging

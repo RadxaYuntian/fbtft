@@ -1,0 +1,36 @@
+// Original author: HejinYo
+// https://github.com/HejinYo/ss/blob/master/doc/radxa/meson-g12a-spi-lcd-1.14.dts
+
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "radxa,zero", "amlogic,g12a";
+
+    fragment@0 {
+        target = <&spicc1>;
+        __overlay__ {
+            #address-cells = <1>;
+            #size-cells = <0>;
+            pinctrl-0 = <&spicc1_pins &spicc1_ss0_pins>;
+            pinctrl-names = "default";
+            
+            st7789v: st7789v@0 {
+                compatible = "sitronix,st7789v";
+                status = "okay";
+                reg = <0>;
+                debug = <0>;
+
+                spi-max-frequency = <10000000>;
+                rotate = <270>;
+                fps = <60>;
+                buswidth = <8>;
+                bgr = <0>;
+
+                dc-gpios = <&gpio 73 0>; // Pin 18
+                reset-gpios = <&gpio 48 1>; // Pin 22
+                led-gpios = <&gpio 75 0>; // pin 16
+            };
+        };
+    };
+};
